@@ -1,0 +1,54 @@
+
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: #0B0D12;
+}
+::-webkit-scrollbar-thumb {
+    background: #2A3347;
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: #10b981;
+}
+
+/* Tab 動態切換淡入效果 */
+.tab-content {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+}
+.tab-content.active {
+    display: block;
+    opacity: 1;
+}
+
+/* 毛玻璃高質感面板 */
+.glass-panel {
+    background: rgba(19, 23, 34, 0.85);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* 文字漸層特效 */
+.gold-gradient-text {
+    background: linear-gradient(135deg, #FFF 30%, #FACC15 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.emerald-gradient-text {
+    background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* 卡片懸浮微互動 */
+.film-card {
+    transition: transform 0.3s ease, border-color 0.3s ease;
+}
+.film-card:hover {
+    transform: translateY(-4px);
+}

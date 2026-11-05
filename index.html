@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="zh-TW" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>2026 戒菸影展 | Smoke-Free Film Festival | 點燃希望，熄滅煙蒂</title>
+    <meta name="title" content="2026 戒菸影展 | Smoke-Free Film Festival | 點燃希望，熄滅煙蒂">
+    <meta name="description" content="2026 全球首個結合電影藝術與戒菸衛教的國際影展。透過影像的力量紀錄戒菸心路歷程、重獲健康的感動，提供線上觀影、影展日程與專業戒菸諮詢資源。">
+    <meta name="keywords" content="戒菸影展, 戒菸專線 0800-636363, 無煙影展, 健康電影, 肺部保健, 戒菸好處, 影展線上看, 戒菸心得">
+    <meta name="author" content="Smoke-Free Film Festival Organizing Committee">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://smoke-free-filmfest.vercel.app/">
+    <meta property="og:title" content="2026 戒菸影展 | Smoke-Free Film Festival">
+    <meta property="og:description" content="點燃影像的希望，熄滅手中的煙蒂。探索四大映演單元、線上影展與專業戒菸資源。">
+    <meta property="og:image" content="images/hero-banner.jpg">
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://smoke-free-filmfest.vercel.app/">
+    <meta property="twitter:title" content="2026 戒菸影展 | Smoke-Free Film Festival">
+    <meta property="twitter:description" content="點燃影像的希望，熄滅手中的煙蒂。探索四大映演單元、線上影展與專業戒菸資源。">
+    <meta property="twitter:image" content="images/hero-banner.jpg">
+
+    <!-- Schema.org Structured Data (JSON-LD) for Event -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Festival",
+      "name": "2026 戒菸影展 (Smoke-Free Film Festival)",
+      "startDate": "2026-11-20",
+      "endDate": "2026-12-10",
+      "eventAttendanceMode": "https://schema.org/MixedEventAttendanceMode",
+      "eventStatus": "https://schema.org/EventScheduled",
+      "location": [
+        {
+          "@type": "Place",
+          "name": "光點台北電影館 / 線上播映平台",
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "中山北路二段18號",
+            "addressLocality": "台北市",
+            "postalCode": "104",
+            "addressCountry": "TW"
+          }
+        }
+      ],
+      "image": [
+        "https://smoke-free-filmfest.vercel.app/images/hero-banner.jpg"
+      ],
+      "description": "以影像探索菸害防治與生命重生的全球電影節",
+      "organizer": {
+        "@type": "Organization",
+        "name": "戒菸影展籌備委員會",
+        "url": "https://smoke-free-filmfest.vercel.app"
+      }
+    }
+    </script>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        gold: { 400: '#facc15', 500: '#eab308', 600: '#ca8a04' },
+                        emerald: { 400: '#34d399', 500: '#10b981', 600: '#059669', 900: '#064e3b' },
+                        cinema: { 900: '#0B0D12', 800: '#131722', 700: '#1E2433', 600: '#2A3347' }
+                    },
+                    fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- 引入外部切割後的 CSS 檔案 -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-cinema-900 text-slate-100 font-sans antialiased min-h-screen flex flex-col justify-between selection:bg-emerald-500 selection:text-cinema-900">
+
+    <!-- 頂部導覽列 (Navbar) -->
+    <header class="sticky top-0 z-40 w-full glass-panel border-b border-slate-800/80">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Brand Logo -->
+                <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('home')">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-tr from-emerald-500 to-teal-300 flex items-center justify-center shadow-lg shadow-emerald-500/20">
+                        <i class="fa-solid font-bold fa-film text-cinema-900 text-xl"></i>
+                    </div>
+                    <div>
+                        <span class="text-xl font-extrabold tracking-wider text-white uppercase block leading-none">
+                            Smoke<span class="text-emerald-400">Free</span>
+                        </span>
+                        <span class="text-[10px] tracking-widest text-slate-400 font-semibold uppercase">Film Festival 2026</span>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation Items -->
+                <nav class="hidden md:flex items-center space-x-1 lg:space-x-2">
+                    <button onclick="switchTab('home')" id="nav-home" class="nav-btn px-4 py-2 rounded-lg text-sm font-medium transition-all text-emerald-400 bg-slate-800/60">
+                        <i class="fa-solid fa-house mr-1.5"></i> 影展首頁
+                    </button>
+                    <button onclick="switchTab('schedule')" id="nav-schedule" class="nav-btn px-4 py-2 rounded-lg text-sm font-medium transition-all text-slate-300 hover:text-white hover:bg-slate-800/40">
+                        <i class="fa-solid fa-calendar-days mr-1.5"></i> 日程與單元
+                    </button>
+                    <button onclick="switchTab('cinema')" id="nav-cinema" class="nav-btn px-4 py-2 rounded-lg text-sm font-medium transition-all text-slate-300 hover:text-white hover:bg-slate-800/40">
+                        <i class="fa-solid fa-circle-play mr-1.5"></i> 線上影展
+                    </button>
+                    <button onclick="switchTab('resources')" id="nav-resources" class="nav-btn px-4 py-2 rounded-lg text-sm font-medium transition-all text-slate-300 hover:text-white hover:bg-slate-800/40">
+                        <i class="fa-solid fa-heart-pulse mr-1.5 text-emerald-400"></i> 戒菸衛教
+                    </button>
+                    <button onclick="switchTab('about')" id="nav-about" class="nav-btn px-4 py-2 rounded-lg text-sm font-medium transition-all text-slate-300 hover:text-white hover:bg-slate-800/40">
+                        <i class="fa-solid fa-circle-info mr-1.5"></i> 關於/聯絡
+                    </button>
+                </nav>
+
+                <!-- Actions & Mobile Menu Toggle -->
+                <div class="flex items-center gap-3">
+                    <a href="tel:0800636363" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 text-cinema-900 font-bold text-xs hover:shadow-lg hover:shadow-emerald-500/25 transition">
+                        <i class="fa-solid fa-phone-volume"></i>
+                        <span>戒菸專線 0800-636363</span>
+                    </a>
+
+                    <button id="sidebar-toggle" onclick="toggleSidebar()" class="p-2.5 rounded-lg text-slate-300 hover:bg-slate-800 transition lg:hidden" aria-label="Toggle Sidebar">
+                        <i class="fa-solid fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- 主體內容 (含 Layout & Grid System) -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full flex-grow">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+            
+            <!-- 主內容區塊 (Tabs Content) - 佔 8/12 或 9/12 欄位 -->
+            <main class="lg:col-span-8 xl:col-span-9 space-y-8">
+
+                <!-- 頁面 1: 影展首頁 -->
+                <section id="tab-home" class="tab-content active">
+                    <!-- Hero Banner (使用 images 資料夾下的圖片) -->
+                    <div class="relative rounded-3xl overflow-hidden border border-slate-800 bg-cinema-800 group shadow-2xl">
+                        <img src="images/hero-banner.jpg" 
+                             alt="Smoke-Free Film Festival Banner" 
+                             onerror="this.src='https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?q=80&w=1200&auto=format&fit=crop'"
+                             class="w-full h-[360px] sm:h-[420px] object-cover opacity-40 group-hover:scale-105 transition-transform duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-t from-cinema-900 via-cinema-900/60 to-transparent flex flex-col justify-end p-6 sm:p-10">
+                            <span class="inline-block px-3 py-1 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 text-xs font-semibold uppercase tracking-widest mb-3 w-max">
+                                2026 年度特別策展
+                            </span>
+                            <h1 class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight leading-tight mb-3">
+                                熄滅煙蒂，<br><span class="emerald-gradient-text">點燃影像的生命曙光</span>
+                            </h1>
+                            <p class="text-slate-300 text-sm sm:text-base max-w-2xl line-clamp-2 sm:line-clamp-none mb-6">
+                                結合電影藝術與健康衛教，透過導演鏡頭記錄全台灣與世界各地戒菸者的掙扎、堅持與重獲新生的動人時刻。
+                            </p>
+                            <div class="flex flex-wrap gap-3">
+                                <button onclick="switchTab('cinema')" class="px-6 py-3 rounded-xl bg-emerald-500 text-cinema-900 font-bold hover:bg-emerald-400 transition shadow-lg shadow-emerald-500/20 flex items-center gap-2">
+                                    <i class="fa-solid fa-play"></i> 觀看精選預告
+                                </button>
+                                <button onclick="switchTab('schedule')" class="px-6 py-3 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-white font-medium border border-slate-700 transition">
+                                    查看映演場次
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 三大核心價值 Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
+                        <div class="p-6 rounded-2xl bg-cinema-800/60 border border-slate-800 hover:border-emerald-500/30 transition">
+                            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center text-2xl mb-4">
+                                <i class="fa-solid fa-video"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-white mb-2">影像記錄真實</h3>
+                            <p class="text-xs text-slate-400 leading-relaxed">收錄 24 部國內外真實紀錄短片，不美化癮頭，深層剖析菸癮背後的心理故事。</p>
+                        </div>
+                        <div class="p-6 rounded-2xl bg-cinema-800/60 border border-slate-800 hover:border-emerald-500/30 transition">
+                            <div class="w-12 h-12 rounded-xl bg-teal-500/10 text-teal-400 flex items-center justify-center text-2xl mb-4">
+                                <i class="fa-solid fa-lungs"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-white mb-2">衛教醫學論壇</h3>
+                            <p class="text-xs text-slate-400 leading-relaxed">邀請胸腔科醫師、心理諮商師與導演進行映後座談，深度探討菸害對生命的影響。</p>
+                        </div>
+                        <div class="p-6 rounded-2xl bg-cinema-800/60 border border-slate-800 hover:border-emerald-500/30 transition">
+                            <div class="w-12 h-12 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center text-2xl mb-4">
+                                <i class="fa-solid fa-hand-holding-heart"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-white mb-2">陪伴戒菸同行</h3>
+                            <p class="text-xs text-slate-400 leading-relaxed">現場與線上同步提供衛福部戒菸專線 0800-636363 免費諮詢管道與陪伴資源。</p>
+                        </div>
+                    </div>
+
+                    <!-- 焦點影片 Grid -->
+                    <div class="mt-10">
+                        <div class="flex items-center justify-between mb-6">
+                            <div>
+                                <h2 class="text-2xl font-bold text-white">焦點參展影片</h2>
+                                <p class="text-slate-400 text-xs mt-1">2026 金菸蒂獎入圍影展首映作品</p>
+                            </div>
+                            <button onclick="switchTab('cinema')" class="text-emerald-400 text-xs font-semibold hover:underline flex items-center gap-1">
+                                查看全部 <i class="fa-solid fa-arrow-right"></i>
+                            </button>
+                        </div>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <!-- Film 1 -->
+                            <div class="bg-cinema-800 rounded-2xl overflow-hidden border border-slate-800 hover:border-slate-700 transition group flex flex-col justify-between">
+                                <div class="relative overflow-hidden aspect-video">
+                                    <img src="images/film-01.jpg" onerror="this.src='https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?q=80&w=600&auto=format&fit=crop'" alt="《最後一口淡煙》海報" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                                    <span class="absolute top-3 left-3 bg-cinema-900/80 backdrop-blur text-amber-400 border border-amber-500/30 text-[10px] px-2.5 py-1 rounded-md font-bold">
+                                        開幕片
+                                    </span>
+                                </div>
+                                <div class="p-5 flex-grow flex flex-col justify-between">
+                                    <div>
+                                        <div class="flex justify-between items-center text-xs text-slate-400 mb-2">
+                                            <span>導演：陳一鳴</span>
+                                            <span class="text-emerald-400"><i class="fa-solid fa-star"></i> 4.9 (128)</span>
+                                        </div>
+                                        <h3 class="text-lg font-bold text-white mb-2 group-hover:text-emerald-400 transition">《最後一口淡煙》</h3>
+                                        <p class="text-slate-400 text-xs line-clamp-2">講述一位煙齡長達 30 年的老廚師，在小孫女出生後決定下定決心戒菸的真實心路歷程。</p>
+                                    </div>
+                                    <button onclick="openModal('最後一口淡煙', 'https://www.youtube.com/embed/dQw4w9WgXcQ', '講述一位煙齡長達 30 年的老廚師，在小孫女出生後決定下定決心戒菸的真實心路歷程。')" class="mt-4 w-full py-2 bg-slate-700/50 hover:bg-emerald-500 hover:text-cinema-900 text-slate-200 text-xs font-bold rounded-lg transition">
+                                        預告片播放
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Film 2 -->
+                            <div class="bg-cinema-800 rounded-2xl overflow-hidden border border-slate-800 hover:border-slate-700 transition group flex flex-col justify-between">
+                                <div class="relative overflow-hidden aspect-video">
+                                    <img src="images/film-02.jpg" onerror="this.src='https://images.unsplash.com/photo-1536440136628-849c177e76a1?q=80&w=600&auto=format&fit=crop'" alt="《肺部的澄清日》海報" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                                    <span class="absolute top-3 left-3 bg-cinema-900/80 backdrop-blur text-emerald-400 border border-emerald-500/30 text-[10px] px-2.5 py-1 rounded-md font-bold">
+                                        最佳紀錄片入圍
+                                    </span>
+                                </div>
+                                <div class="p-5 flex-grow flex flex-col justify-between">
+                                    <div>
+                                        <div class="flex justify-between items-center text-xs text-slate-400 mb-2">
+                                            <span>導演：Sophia Lin</span>
+                                            <span class="text-emerald-400"><i class="fa-solid fa-star"></i> 4.8 (95)</span>
+                                        </div>
+                                        <h3 class="text-lg font-bold text-white mb-2 group-hover:text-emerald-400 transition">《肺部的澄清日》</h3>
+                                        <p class="text-slate-400 text-xs line-clamp-2">運用高科技顯微拍攝與患者專訪，呈現在戒菸第 1 天到第 365 天肺部纖毛組織重生的奇蹟。</p>
+                                    </div>
+                                    <button onclick="openModal('肺部的澄清日', 'https://www.youtube.com/embed/dQw4w9WgXcQ', '運用高科技顯微拍攝與患者專訪，呈現在戒菸第 1 天到第 365 天肺部纖毛組織重生的奇蹟。')" class="mt-4 w-full py-2 bg-slate-700/50 hover:bg-emerald-500 hover:text-cinema-900 text-slate-200 text-xs font-bold rounded-lg transition">
+                                        預告片播放
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 頁面 2: 影展日程與單元 -->
+                <section id="tab-schedule" class="tab-content">
+                    <div class="mb-8">
+                        <h2 class="text-3xl font-extrabold text-white">影展日程與四大映演單元</h2>
+                        <p class="text-slate-400 text-sm mt-1">2026/11/20 ~ 12/10 光點台北與線上同步放映</p>
+                    </div>
+
+                    <!-- 四大單元 Grid -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                        <div class="p-5 bg-cinema-800 rounded-2xl border-l-4 border-emerald-500">
+                            <span class="text-xs text-emerald-400 font-bold uppercase tracking-wider">Unit 01</span>
+                            <h3 class="text-lg font-bold text-white mt-1">【戒菸心路】</h3>
+                            <p class="text-xs text-slate-400 mt-2">聚焦於個人心理戰勝菸癮的深刻實錄與刻骨銘心的告別歷程。</p>
+                        </div>
+                        <div class="p-5 bg-cinema-800 rounded-2xl border-l-4 border-cyan-500">
+                            <span class="text-xs text-cyan-400 font-bold uppercase tracking-wider">Unit 02</span>
+                            <h3 class="text-lg font-bold text-white mt-1">【肺部新生】</h3>
+                            <p class="text-xs text-slate-400 mt-2">科學與醫學視角，呈現身體在遠離二手菸及一手菸後的生理修復奇蹟。</p>
+                        </div>
+                        <div class="p-5 bg-cinema-800 rounded-2xl border-l-4 border-rose-500">
+                            <span class="text-xs text-rose-400 font-bold uppercase tracking-wider">Unit 03</span>
+                            <h3 class="text-lg font-bold text-white mt-1">【家庭與愛】</h3>
+                            <p class="text-xs text-slate-400 mt-2">探討二手菸與三手菸對家人的愛與傷害，為了心愛之人選擇改變。</p>
+                        </div>
+                        <div class="p-5 bg-cinema-800 rounded-2xl border-l-4 border-amber-500">
+                            <span class="text-xs text-amber-400 font-bold uppercase tracking-wider">Unit 04</span>
+                            <h3 class="text-lg font-bold text-white mt-1">【青春無煙】</h3>
+                            <p class="text-xs text-slate-400 mt-2">針對電子菸與新興菸品的防範，專為青少年與新世代打造的警示特別篇。</p>
+                        </div>
+                    </div>
+
+                    <!-- 放映時間表 Schedule Timeline -->
+                    <div class="bg-cinema-800/60 rounded-2xl border border-slate-800 p-6">
+                        <h3 class="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                            <i class="fa-solid fa-clock text-emerald-400"></i> 放映場次時間表
+                        </h3>
+                        <div class="space-y-4">
+                            <div class="p-4 rounded-xl bg-cinema-900/80 border border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                                <div class="flex items-center gap-4">
+                                    <div class="text-center px-3 py-2 bg-emerald-500/10 rounded-lg border border-emerald-500/20 text-emerald-400">
+                                        <div class="text-xs font-bold">11/20</div>
+                                        <div class="text-xs">FRI</div>
+                                    </div>
+                                    <div>
+                                        <div class="text-xs text-slate-400">14:00 - 16:00 | 光點台北 A 廳</div>
+                                        <h4 class="text-base font-bold text-white">開幕片：《最後一口淡煙》+ 映後座談</h4>
+                                    </div>
+                                </div>
+                                <span class="px-3 py-1 bg-emerald-500/20 text-emerald-300 text-xs font-semibold rounded-full w-max">劃位開放中</span>
+                            </div>
+                            <div class="p-4 rounded-xl bg-cinema-900/80 border border-slate-800 flex flex-col md:flex-row md:items-center justify-between gap-4">
+                                <div class="flex items-center gap-4">
+                                    <div class="text-center px-3 py-2 bg-slate-800 rounded-lg text-slate-300">
+                                        <div class="text-xs font-bold">11/25</div>
+                                        <div class="text-xs">WED</div>
+                                    </div>
+                                    <div>
+                                        <div class="text-xs text-slate-400">19:00 - 20:30 | 線上影院直播</div>
+                                        <h4 class="text-base font-bold text-white">《無煙青春：迷霧真相》線上特映會</h4>
+                                    </div>
+                                </div>
+                                <span class="px-3 py-1 bg-slate-700 text-slate-300 text-xs font-semibold rounded-full w-max">免費線上預約</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 頁面 3: 線上影展 (Online Cinema) -->
+                <section id="tab-cinema" class="tab-content">
+                    <div class="mb-8">
+                        <h2 class="text-3xl font-extrabold text-white">線上影展與預告觀賞</h2>
+                        <p class="text-slate-400 text-sm mt-1">在家即刻免費觀賞參展預告與精彩片段</p>
+                    </div>
+
+                    <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6">
+                        <!-- Card 1 -->
+                        <div class="bg-cinema-800 rounded-xl overflow-hidden border border-slate-800 hover:border-emerald-500/50 transition">
+                            <div class="relative">
+                                <img src="images/film-03.jpg" onerror="this.src='https://images.unsplash.com/photo-1485846234645-a62644f84728?q=80&w=500&auto=format&fit=crop'" class="w-full h-44 object-cover">
+                                <button onclick="openModal('迷霧中的呼吸', 'https://www.youtube.com/embed/dQw4w9WgXcQ', '講述都市人在壓力下依賴電子菸，最終尋回清新空氣的故事。')" class="absolute inset-0 bg-cinema-900/40 hover:bg-cinema-900/20 flex items-center justify-center transition">
+                                    <div class="w-12 h-12 rounded-full bg-emerald-500 text-cinema-900 flex items-center justify-center text-lg pl-1 shadow-lg">
+                                        <i class="fa-solid fa-play"></i>
+                                    </div>
+                                </button>
+                            </div>
+                            <div class="p-4">
+                                <span class="text-[10px] text-emerald-400 font-bold uppercase tracking-widest">劇情短片</span>
+                                <h4 class="text-base font-bold text-white mt-1">《迷霧中的呼吸》</h4>
+                                <p class="text-slate-400 text-xs mt-1 line-clamp-2">都市職場壓力下，男主角如何打破尼古丁枷鎖的故事。</p>
+                            </div>
+                        </div>
+
+                        <!-- Card 2 -->
+                        <div class="bg-cinema-800 rounded-xl overflow-hidden border border-slate-800 hover:border-emerald-500/50 transition">
+                            <div class="relative">
+                                <img src="images/film-04.jpg" onerror="this.src='https://images.unsplash.com/photo-1518173946687-a4c8a383392e?q=80&w=500&auto=format&fit=crop'" class="w-full h-44 object-cover">
+                                <button onclick="openModal('重拾清晨的微風', 'https://www.youtube.com/embed/dQw4w9WgXcQ', '一位慢跑愛好者在戒菸後，肺活量提升並完成全馬的感人歷程。')" class="absolute inset-0 bg-cinema-900/40 hover:bg-cinema-900/20 flex items-center justify-center transition">
+                                    <div class="w-12 h-12 rounded-full bg-emerald-500 text-cinema-900 flex items-center justify-center text-lg pl-1 shadow-lg">
+                                        <i class="fa-solid fa-play"></i>
+                                    </div>
+                                </button>
+                            </div>
+                            <div class="p-4">
+                                <span class="text-[10px] text-teal-400 font-bold uppercase tracking-widest">紀錄片</span>
+                                <h4 class="text-base font-bold text-white mt-1">《重拾清晨的微風》</h4>
+                                <p class="text-slate-400 text-xs mt-1 line-clamp-2">慢跑愛好者在戒菸後，肺活量恢復並成功挑戰全馬紀錄。</p>
+                            </div>
+                        </div>
+
+                        <!-- Card 3 -->
+                        <div class="bg-cinema-800 rounded-xl overflow-hidden border border-slate-800 hover:border-emerald-500/50 transition">
+                            <div class="relative">
+                                <img src="images/film-05.jpg" onerror="this.src='https://images.unsplash.com/photo-1524712245354-2c4e5e7121c0?q=80&w=500&auto=format&fit=crop'" class="w-full h-44 object-cover">
+                                <button onclick="openModal('爸爸的口袋沒有煙', 'https://www.youtube.com/embed/dQw4w9WgXcQ', '以兒童第一人稱視角，記錄爸爸為了女兒徹底戒菸的溫馨故事。')" class="absolute inset-0 bg-cinema-900/40 hover:bg-cinema-900/20 flex items-center justify-center transition">
+                                    <div class="w-12 h-12 rounded-full bg-emerald-500 text-cinema-900 flex items-center justify-center text-lg pl-1 shadow-lg">
+                                        <i class="fa-solid fa-play"></i>
+                                    </div>
+                                </button>
+                            </div>
+                            <div class="p-4">
+                                <span class="text-[10px] text-amber-400 font-bold uppercase tracking-widest">家庭倫理</span>
+                                <h4 class="text-base font-bold text-white mt-1">《爸爸的口袋沒有煙》</h4>
+                                <p class="text-slate-400 text-xs mt-1 line-clamp-2">兒童視角呈現，擁抱不再帶著菸味的父親是多麼溫暖。</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 頁面 4: 戒菸衛教與計算器 (Quit Resources) -->
+                <section id="tab-resources" class="tab-content">
+                    <div class="mb-8">
+                        <h2 class="text-3xl font-extrabold text-white">戒菸衛教資源與健康計算器</h2>
+                        <p class="text-slate-400 text-sm mt-1">科學數據告訴你：從停止吸菸的那一刻起，身體就在奇蹟修復</p>
+                    </div>
+
+                    <!-- 戒菸效益計算器 -->
+                    <div class="p-6 rounded-2xl bg-gradient-to-br from-cinema-800 to-slate-900 border border-emerald-500/30 mb-8">
+                        <h3 class="text-lg font-bold text-emerald-400 mb-2 flex items-center gap-2">
+                            <i class="fa-solid fa-calculator"></i> 戒菸省錢與健康小算盤
+                        </h3>
+                        <p class="text-xs text-slate-400 mb-6">輸入你每天的吸菸量，算算戒菸能為你省下多少錢與健康！</p>
+
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 mb-2">平均每天吸幾包菸？</label>
+                                <input id="calc-packs" type="number" value="1" min="0.1" step="0.5" oninput="calculateSavings()" class="w-full bg-cinema-900 border border-slate-700 rounded-xl px-4 py-2 text-slate-200 text-sm focus:border-emerald-500 focus:outline-none">
+                            </div>
+                            <div>
+                                <label class="block text-xs font-semibold text-slate-300 mb-2">每包菸平均價格 (NTD)</label>
+                                <input id="calc-price" type="number" value="125" min="50" oninput="calculateSavings()" class="w-full bg-cinema-900 border border-slate-700 rounded-xl px-4 py-2 text-slate-200 text-sm focus:border-emerald-500 focus:outline-none">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-3 gap-3 text-center">
+                            <div class="p-4 bg-cinema-900/90 rounded-xl border border-slate-800">
+                                <span class="text-[10px] text-slate-400 block">一年可省下</span>
+                                <span id="res-year" class="text-lg sm:text-2xl font-extrabold text-emerald-400">NT$ 45,625</span>
+                            </div>
+                            <div class="p-4 bg-cinema-900/90 rounded-xl border border-slate-800">
+                                <span class="text-[10px] text-slate-400 block">5 年可買</span>
+                                <span id="res-item" class="text-xs sm:text-sm font-bold text-amber-400 mt-1 block">最新款 iPhone 兩支</span>
+                            </div>
+                            <div class="p-4 bg-cinema-900/90 rounded-xl border border-slate-800">
+                                <span class="text-[10px] text-slate-400 block">減少有毒物質</span>
+                                <span class="text-xs sm:text-sm font-bold text-cyan-400 mt-1 block">7,000+ 種化學物</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 頁面 5: 關於與聯絡 (About & Contact) -->
+                <section id="tab-about" class="tab-content">
+                    <div class="mb-8">
+                        <h2 class="text-3xl font-extrabold text-white">關於影展與聯絡我們</h2>
+                        <p class="text-slate-400 text-sm mt-1">Smoke-Free Film Festival 創辦理念與合作聯繫</p>
+                    </div>
+
+                    <div class="bg-cinema-800 rounded-2xl border border-slate-800 p-6">
+                        <h3 class="text-xl font-bold text-white mb-4">聯絡委員會 / 團體包場詢問</h3>
+                        <form onsubmit="handleContactSubmit(event)" class="space-y-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-300 mb-1">您的姓名</label>
+                                    <input type="text" required class="w-full bg-cinema-900 border border-slate-700 rounded-xl px-4 py-2 text-xs text-slate-200 focus:border-emerald-500 focus:outline-none">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-medium text-slate-300 mb-1">電子信箱</label>
+                                    <input type="email" required class="w-full bg-cinema-900 border border-slate-700 rounded-xl px-4 py-2 text-xs text-slate-200 focus:border-emerald-500 focus:outline-none">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-xs font-medium text-slate-300 mb-1">留言內容 / 詢問事項</label>
+                                <textarea rows="4" required class="w-full bg-cinema-900 border border-slate-700 rounded-xl px-4 py-2 text-xs text-slate-200 focus:border-emerald-500 focus:outline-none"></textarea>
+                            </div>
+                            <button type="submit" class="px-6 py-2.5 bg-emerald-500 text-cinema-900 font-bold text-xs rounded-xl hover:bg-emerald-400 transition">
+                                送出訊息
+                            </button>
+                        </form>
+                    </div>
+                </section>
+
+            </main>
+
+            <!-- 側邊欄 (Sidebar) - 佔 4/12 欄位 -->
+            <aside id="sidebar" class="lg:col-span-4 xl:col-span-3 space-y-6">
+                <!-- 戒菸專線卡片 -->
+                <div class="p-6 rounded-2xl bg-gradient-to-br from-emerald-900/50 to-cinema-800 border border-emerald-500/30 text-center relative overflow-hidden">
+                    <div class="w-12 h-12 mx-auto rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center text-xl mb-3">
+                        <i class="fa-solid fa-headset"></i>
+                    </div>
+                    <h3 class="text-base font-bold text-white mb-1">需要戒菸協助嗎？</h3>
+                    <p class="text-xs text-slate-300 mb-4">免費戒菸專線，專業醫護人員線上陪伴您</p>
+                    <a href="tel:0800636363" class="block w-full py-2.5 bg-emerald-500 text-cinema-900 font-bold text-xs rounded-xl hover:bg-emerald-400 transition shadow-lg shadow-emerald-500/20">
+                        <i class="fa-solid fa-phone mr-1"></i> 0800-636363
+                    </a>
+                </div>
+
+                <!-- 觀影提醒 -->
+                <div class="p-5 rounded-2xl bg-cinema-800/60 border border-slate-800">
+                    <h3 class="text-sm font-bold text-white mb-3 flex items-center gap-2">
+                        <i class="fa-solid fa-circle-exclamation text-amber-400"></i> 觀影提醒
+                    </h3>
+                    <ul class="text-xs text-slate-400 space-y-2 list-disc list-inside">
+                        <li>實體影展場次請提前 15 分鐘進場。</li>
+                        <li>影影場域內全面禁止吸菸與使用電子菸。</li>
+                        <li>線上影展提供全高清 1080p 免費串流。</li>
+                    </ul>
+                </div>
+            </aside>
+
+        </div>
+    </div>
+
+    <!-- 頁尾 (Footer) -->
+    <footer class="border-t border-slate-800 bg-cinema-900 py-8 mt-12">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <p class="text-xs text-slate-500">
+                &copy; 2026 戒菸影展 Smoke-Free Film Festival. All Rights Reserved. 指導單位：衛生福利部國民健康署
+            </p>
+        </div>
+    </footer>
+
+    <!-- Modal 播放器 -->
+    <div id="video-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+        <div class="bg-cinema-800 border border-slate-700 rounded-2xl max-w-2xl w-full overflow-hidden shadow-2xl">
+            <div class="p-4 border-b border-slate-700 flex justify-between items-center">
+                <h3 id="modal-title" class="font-bold text-white text-base">影片預告</h3>
+                <button onclick="closeModal()" class="text-slate-400 hover:text-white p-1">
+                    <i class="fa-solid fa-xmark text-xl"></i>
+                </button>
+            </div>
+            <div class="relative aspect-video bg-black">
+                <iframe id="modal-iframe" class="w-full h-full" src="" title="YouTube video player" frameborder="0" allowfullscreen></iframe>
+            </div>
+            <div class="p-4">
+                <p id="modal-desc" class="text-xs text-slate-300"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- JS 控制腳本 -->
+    <script>
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
+            const targetTab = document.getElementById(`tab-${tabId}`);
+            if (targetTab) targetTab.classList.add('active');
+
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('text-emerald-400', 'bg-slate-800/60');
+                btn.classList.add('text-slate-300');
+            });
+            const activeNavBtn = document.getElementById(`nav-${tabId}`);
+            if (activeNavBtn) {
+                activeNavBtn.classList.add('text-emerald-400', 'bg-slate-800/60');
+                activeNavBtn.classList.remove('text-slate-300');
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('hidden');
+        }
+
+        function openModal(title, videoUrl, desc) {
+            document.getElementById('modal-title').innerText = title;
+            document.getElementById('modal-iframe').src = videoUrl;
+            document.getElementById('modal-desc').innerText = desc;
+            document.getElementById('video-modal').classList.remove('hidden');
+        }
+
+        function closeModal() {
+            document.getElementById('video-modal').classList.add('hidden');
+            document.getElementById('modal-iframe').src = '';
+        }
+
+        function calculateSavings() {
+            const packs = parseFloat(document.getElementById('calc-packs').value) || 0;
+            const price = parseFloat(document.getElementById('calc-price').value) || 0;
+            const yearlySavings = Math.round(packs * price * 365);
+            document.getElementById('res-year').innerText = `NT$ ${yearlySavings.toLocaleString()}`;
+            const itemText = document.getElementById('res-item');
+            if (yearlySavings < 20000) itemText.innerText = "日本來回機票 1 張";
+            else if (yearlySavings < 50000) itemText.innerText = "最新款旗艦手機 1 支";
+            else itemText.innerText = "高級影音設備或歐州旅遊基金";
+        }
+
+        function handleContactSubmit(e) {
+            e.preventDefault();
+            alert('感謝您的留言！戒菸影展籌備組將會儘速回覆您。');
+            e.target.reset();
+        }
+    </script>
+</body>
+</html>
